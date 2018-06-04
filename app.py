@@ -39,13 +39,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print(event)
-	"""
-	* event.message.text 是 使用者傳回來的對話
-	* TextSendMessage 則是把傳回來的對話改成可以replay or push 的格式
-	* 建議讀者可以自行更改(text=event.message.text) 例如改成 (text="Hello World")
-	"""
+    """
+    * event.message.text 是 使用者傳回來的對話
+    * TextSendMessage 則是把傳回來的對話改成可以replay or push 的格式
+    * 建議讀者可以自行更改(text=event.message.text) 例如改成 (text="Hello World")
+    """
     message = TextSendMessage(text=event.message.text)
-	
+    
     replay_message(event,message)
  
 def replay_message(event,text):
@@ -54,9 +54,10 @@ def replay_message(event,text):
         text)
         
 def push_message(event,text):
-    line_bot_api.reply_message(
+    line_bot_api.push_message(
         event.source.user_id,
         text)        
+
 
     
 if __name__ == "__main__":
